@@ -8,15 +8,12 @@ module.exports = [
         module: {
             rules: [
                 {
-                    test: /\.ts$/,
+                    test: /\.tsx?$/,
+                    use: 'ts-loader',
                     include: /src/,
-                    use: [
-                        {
-                            loader: 'ts-loader'
-                        }
-                    ]
-                }
-            ]
+                    exclude: /node_modules/,
+                },
+            ],
         },
         output: {
             path: __dirname + '/app',
