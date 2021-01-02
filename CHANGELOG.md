@@ -7,3 +7,5 @@
 - Install `Electronjs`
 - Project structure
 - Changelog
+- Configure `Webpack` to build typescript
+- Simple `Hello World!`
