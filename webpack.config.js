@@ -20,7 +20,7 @@ module.exports = [
     },
     {
         mode: PRD_MODE,
-        entry: './src/renderer.ts',
+        entry: './src/renderer.tsx',
         target: 'electron-renderer',
         module: {
             rules: [
