@@ -11,13 +11,13 @@ function createWindow() {
 
 app.whenReady().then(createWindow);
 
-app.on('activate', () => {
+app.on('activate', (): void => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
 });
 
-app.on('window-all-closed', () => {
+app.on('window-all-closed', (): void => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
