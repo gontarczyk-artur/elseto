@@ -1,0 +1,6 @@
+{
+    "description": "Elasticsearch Client, version 7.10",
+    "dependencies": {
+        "@elastic/elasticsearch": "7.10.0"
+    }
+}
