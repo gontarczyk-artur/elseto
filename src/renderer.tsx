@@ -1,14 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
 
-const Index = () => {
-    return (
-        <div>
-            <p>Hello React World!</p>
-            <Button variant="contained" color="primary">Press me!</Button>
-        </div>
-    )
+import OfflineHomePage from './page/OfflineHomePage';
+
+
+class Root extends React.Component {
+    render() {
+        return <OfflineHomePage />
+    }
 }
 
-ReactDOM.render(<Index />, document.body);
+ReactDOM.render(<Root />, document.querySelector('#root'));

@@ -22,7 +22,8 @@
     "name": "elseto",
     "scripts": {
         "build": "webpack --config ./webpack.config.js",
-        "start": "yarn run build && electron ./app/main.js"
+        "build-and-start": "yarn run build && electron ./app/main.js",
+        "start": "electron ./app/main.js"
     },
     "version": "0.2.0"
 }

@@ -30,6 +30,9 @@ module.exports = [
         output: {
             path: __dirname + OUTPUT_DIR,
             filename: 'renderer.js'
+        },
+        resolve: {
+            extensions: ['.tsx', '.ts', '.js']
         }
     }
 ]

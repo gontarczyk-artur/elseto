@@ -3,7 +3,9 @@ import { app, BrowserWindow } from 'electron';
 function createWindow() {
     const mainWindow: BrowserWindow = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        minWidth: 800,
+        minHeight: 600
     });
 
     mainWindow.loadFile('index.html');
