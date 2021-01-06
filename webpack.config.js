@@ -6,11 +6,11 @@ const OUTPUT_DIR = '/app';
 module.exports = [
     {
         mode: PRD_MODE,
-        entry: './src/main.ts',
+        entry: './src/main.js',
         target: 'electron-main',
         module: {
             rules: [
-                getTsLoaderRule()
+                getJsLoaderRule()
             ]
         },
         output: {
@@ -20,11 +20,11 @@ module.exports = [
     },
     {
         mode: PRD_MODE,
-        entry: './src/renderer.tsx',
+        entry: './src/renderer.jsx',
         target: 'electron-renderer',
         module: {
             rules: [
-                getTsLoaderRule()
+                getJsLoaderRule()
             ]
         },
         output: {
@@ -32,15 +32,15 @@ module.exports = [
             filename: 'renderer.js'
         },
         resolve: {
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.js', '.jsx']
         }
     }
 ]
 
-function getTsLoaderRule() {
+function getJsLoaderRule() {
     return {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
+        test: /\.jsx?$/,
+        use: 'babel-loader',
         include: /src/,
         exclude: /node_modules/,
     };
