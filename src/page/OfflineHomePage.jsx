@@ -1,8 +1,12 @@
+'use strict';
+
 import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+import { connect } from 'react-redux';
 
 
 class OfflineHomePage extends React.Component {
@@ -32,4 +36,15 @@ class OfflineHomePage extends React.Component {
     }
 }
 
-export default OfflineHomePage;
+const mapStateToProps = state => ({
+    store: state.store
+});
+
+const mapDispatchToProps = {};
+
+const OfflineHomePageContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(OfflineHomePage);
+
+export default OfflineHomePageContainer;
