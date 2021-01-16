@@ -5,11 +5,16 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { connect } from 'react-redux';
 
 
 class OfflineHomePage extends React.Component {
+    onConnect() {
+        //
+    }
+
     render() {
         return (
             <Container fixed>
@@ -27,9 +32,22 @@ class OfflineHomePage extends React.Component {
                         defaultValue="http://localhost:9200"
                         variant="outlined"
                         size="small" 
-                        style={{'width': '350px', 'margin': '0 20px 0 0'}}
+                        style={{'width': '300px'}}
                     />
-                    <Button variant="contained" color="primary">Connect</Button>
+
+                    <TextField
+                        id="outlined-select-gender"
+                        select
+                        value={7.10}
+                        margin="normal"
+                        variant="outlined"
+                        size="small"
+                        style={{'margin': '0 20px'}}
+                    >
+                        <MenuItem key={7.10} value={7.10}>7.10</MenuItem>
+                    </TextField>
+                    
+                    <Button variant="contained" color="primary" onClick={this.onConnect}>Connect</Button>
                 </Grid>
             </Container>
         );
