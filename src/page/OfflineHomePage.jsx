@@ -24,16 +24,20 @@ const OfflineHomePage = props => {
         let es_info_response = {};
         switch(version) {
             case '7.10':
-                let { Client: Client_7_10 } = require('es-client-7.10');
-                let client_7_10 = new Client_7_10({ node: address });
-                es_info_response = await client_7_10.info();
-                if (es_info_response.statusCode === 200) {
-                    setLoadingButtonPending(false);
-                    props.esConnect({
-                        esClient: client_7_10,
-                        address,
-                        version
-                    });
+                try {
+                    let { Client: Client_7_10 } = require('es-client-7.10');
+                    let client_7_10 = new Client_7_10({ node: address });
+                    es_info_response = await client_7_10.info();
+                    if (es_info_response.statusCode === 200) {
+                        setLoadingButtonPending(false);
+                        props.esConnect({
+                            esClient: client_7_10,
+                            address,
+                            version
+                        });
+                    }
+                } catch(error) {
+                    console.log(error);
                 }
                 break;
         }
