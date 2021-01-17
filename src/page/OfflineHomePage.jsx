@@ -9,21 +9,24 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import { connect } from 'react-redux';
 
+import { getCurrentVersion, getAllVersions } from '../module/es-client-version';
+
 function OfflineHomePage() {
     const [address, setAddress] = React.useState('http://localhost:9200');
-    const [version, setVersion] = React.useState(7.10);
+    const [version, setVersion] = React.useState(getCurrentVersion);
     const [loadingButtonPending, setLoadingButtonPending] = React.useState(false);
     const handleAddressChange = event => setAddress(event.target.value);
     const handleVersionChange = event => setVersion(event.target.value);
     const handleConnect = async () => {
         setLoadingButtonPending(true);
 
+        let es_info_response = {};
         switch(version) {
-            case 7.1:
-                const { Client } = require('es-client-7.10');
-                const client = new Client({ node: address });
-                let info = await client.info();
-                if (info.statusCode === 200) {
+            case '7.10':
+                let { Client: Client_7_10 } = require('es-client-7.10');
+                let client_7_10 = new Client_7_10({ node: address });
+                es_info_response = await client_7_10.info();
+                if (es_info_response.statusCode === 200) {
                     setLoadingButtonPending(false);
                 }
                 break;
@@ -34,9 +37,11 @@ function OfflineHomePage() {
         <Container fixed>
             <Grid container spacing={0} direction='row' alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
                 <TextField label='Server address' defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
-                
+
                 <TextField select value={version} onChange={handleVersionChange} margin='normal' variant='outlined' size='small' style={{'margin': '0 20px'}}>
-                    <MenuItem key={7.10} value={7.10}>7.10</MenuItem>
+                    {getAllVersions.map(versionValue => {
+                        return <MenuItem key={`version-${versionValue}`} value={versionValue}>{versionValue}</MenuItem>
+                    })}
                 </TextField>
 
                 <LoadingButton variant='contained' color='primary' pending={loadingButtonPending} onClick={handleConnect}>Connect</LoadingButton>
