@@ -30,7 +30,9 @@ const OfflineHomePage = props => {
                 if (es_info_response.statusCode === 200) {
                     setLoadingButtonPending(false);
                     props.esConnect({
-                        esClient: client_7_10
+                        esClient: client_7_10,
+                        address,
+                        version
                     });
                 }
                 break;
