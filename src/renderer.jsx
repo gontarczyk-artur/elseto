@@ -5,6 +5,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import OfflineHomePage from './page/OfflineHomePage';
+import OnlineHomePage from './page/OnlineHomePage';
 
 import { store } from './module/redux/store';
 
@@ -12,6 +13,7 @@ function Root() {
     return (
         <Provider store={store}>
             <OfflineHomePage />
+            <OnlineHomePage />
         </Provider>
     );
 }
