@@ -8,7 +8,10 @@ function createWindow() {
         width: 800,
         height: 600,
         minWidth: 800,
-        minHeight: 600
+        minHeight: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     mainWindow.loadFile('index.html');

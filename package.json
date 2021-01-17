@@ -5,7 +5,10 @@
         "url": "https://github.com/gontarczyk-artur"
     },
     "dependencies": {
+        "es-client-7.10": "npm:@elastic/elasticsearch@7.10.0",
+        "es-client-7.9": "npm:@elastic/elasticsearch@7.9.0",
         "@material-ui/core": "4.11.2",
+        "@material-ui/lab": "next",
         "react": "17.0.1",
         "react-dom": "17.0.1",
         "react-redux": "7.2.2",
@@ -17,6 +20,8 @@
         "babel-loader": "8.2.2",
         "@babel/preset-env": "7.12.11",
         "@babel/preset-react": "7.12.10",
+        "@babel/plugin-transform-runtime": "7.12.10",
+        "@babel/runtime": "7.12.5",
         "electron": "11.1.1",
         "webpack": "5.11.1",
         "webpack-cli": "4.3.1"
@@ -25,7 +30,8 @@
     "scripts": {
         "build": "webpack --config ./webpack.config.js",
         "build-and-start": "yarn run build && electron ./app/main.js",
-        "start": "electron ./app/main.js"
+        "start": "electron ./app/main.js",
+        "npm-install": "npm install"
     },
     "version": "0.2.0"
 }
