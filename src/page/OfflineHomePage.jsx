@@ -10,8 +10,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from 'react-redux';
 
 import { getCurrentVersion, getAllVersions } from '../module/es-client-version';
+import { esConnect } from '../module/redux/action';
 
-function OfflineHomePage() {
+const OfflineHomePage = props => {
     const [address, setAddress] = React.useState('http://localhost:9200');
     const [version, setVersion] = React.useState(getCurrentVersion);
     const [loadingButtonPending, setLoadingButtonPending] = React.useState(false);
@@ -28,12 +29,15 @@ function OfflineHomePage() {
                 es_info_response = await client_7_10.info();
                 if (es_info_response.statusCode === 200) {
                     setLoadingButtonPending(false);
+                    props.esConnect({
+                        esClient: client_7_10
+                    });
                 }
                 break;
         }
     }
 
-    return (
+    return !props.store.isConnected ? (
         <Container fixed>
             <Grid container spacing={0} direction='row' alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
                 <TextField label='Server address' defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
@@ -47,14 +51,16 @@ function OfflineHomePage() {
                 <LoadingButton variant='contained' color='primary' pending={loadingButtonPending} onClick={handleConnect}>Connect</LoadingButton>
             </Grid>
         </Container>
-    )
+    ) : null;
 }
 
 const mapStateToProps = state => ({
     store: state.store
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    esConnect
+};
 
 const OfflineHomePageContainer = connect(
     mapStateToProps,
