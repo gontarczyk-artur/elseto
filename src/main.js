@@ -1,9 +1,17 @@
+'use strict';
+
 import { app, BrowserWindow } from 'electron';
 
+
 function createWindow() {
-    const mainWindow: BrowserWindow = new BrowserWindow({
+    const mainWindow = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        minWidth: 800,
+        minHeight: 600,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
     mainWindow.loadFile('index.html');
@@ -11,13 +19,13 @@ function createWindow() {
 
 app.whenReady().then(createWindow);
 
-app.on('activate', (): void => {
+app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
     }
 });
 
-app.on('window-all-closed', (): void => {
+app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit();
     }
