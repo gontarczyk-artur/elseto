@@ -8,7 +8,6 @@ import { ES_CONNECT } from './action-type';
 const reducer = (state={}, action) => {
     switch(action.type) {
         case ES_CONNECT:
-            console.log('ES_CONNECT action = ', action);
             return action.payload;
         default:
             return state;
