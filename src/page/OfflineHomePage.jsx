@@ -16,7 +16,16 @@ const OfflineHomePage = props => {
     const [address, setAddress] = React.useState('http://localhost:9200');
     const [version, setVersion] = React.useState(getCurrentVersion);
     const [loadingButtonPending, setLoadingButtonPending] = React.useState(false);
-    const handleAddressChange = event => setAddress(event.target.value);
+    const [loadingButtonDisabled, setLoadingButtonDisabled] = React.useState(false);
+    const handleAddressChange = event => {
+        let fieldValue = event.target.value;
+        setAddress(event.target.value);
+        if (fieldValue === '') {
+            setLoadingButtonDisabled(true);
+        } else {
+            setLoadingButtonDisabled(false);
+        }
+    }
     const handleVersionChange = event => setVersion(event.target.value);
     const handleConnect = async () => {
         setLoadingButtonPending(true);
@@ -55,7 +64,7 @@ const OfflineHomePage = props => {
                     })}
                 </TextField>
 
-                <LoadingButton variant='contained' color='primary' pending={loadingButtonPending} onClick={handleConnect}>Connect</LoadingButton>
+                <LoadingButton variant='contained' color='primary' pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect}>Connect</LoadingButton>
             </Grid>
         </Container>
     ) : null;
