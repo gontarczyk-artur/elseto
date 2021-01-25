@@ -37,6 +37,7 @@ const OfflineHomePage = props => {
                         });
                     }
                 } catch(error) {
+                    setLoadingButtonPending(false);
                     console.log(error);
                 }
                 break;
@@ -46,9 +47,9 @@ const OfflineHomePage = props => {
     return !props.store.isConnected ? (
         <Container fixed>
             <Grid container spacing={0} direction='row' alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
-                <TextField label='Server address' defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
+                <TextField label='Server address' disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
 
-                <TextField select value={version} onChange={handleVersionChange} margin='normal' variant='outlined' size='small' style={{'margin': '0 20px'}}>
+                <TextField select disabled={loadingButtonPending} value={version} onChange={handleVersionChange} margin='normal' variant='outlined' size='small' style={{'margin': '0 20px'}}>
                     {getAllVersions.map(versionValue => {
                         return <MenuItem key={`version-${versionValue}`} value={versionValue}>{versionValue}</MenuItem>
                     })}
