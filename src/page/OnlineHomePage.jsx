@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex'
     },
     drawerPaper: {
+        top: 'auto',
         padding: theme.spacing(1)
     }
 }));

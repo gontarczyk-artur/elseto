@@ -10,4 +10,13 @@ body {
             font-family: "Roboto", "Helvetica", "Arial", sans-serif
         }
     }
+
+    .container-after-titlebar {
+        bottom: -30px;
+    }
+}
+
+#root {
+    overflow: hidden;
+    height: calc(100vh - 30px);
 }
