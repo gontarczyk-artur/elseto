@@ -9,6 +9,8 @@ import OnlineHomePage from './page/OnlineHomePage';
 
 import { store } from './module/redux/store';
 
+import './style/style.scss';
+
 function Root() {
     return (
         <Provider store={store}>
