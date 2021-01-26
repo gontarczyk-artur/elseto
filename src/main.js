@@ -10,8 +10,11 @@ function createWindow() {
         minWidth: 800,
         minHeight: 600,
         webPreferences: {
-            nodeIntegration: true
-        }
+            nodeIntegration: true,
+            enableRemoteModule: true
+        },
+        titleBarStyle: 'hidden',
+        frame: false
     });
 
     mainWindow.loadFile('index.html');

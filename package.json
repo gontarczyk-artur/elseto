@@ -5,6 +5,7 @@
         "url": "https://github.com/gontarczyk-artur"
     },
     "dependencies": {
+        "custom-electron-titlebar": "3.2.6",
         "es-client-7.10": "npm:@elastic/elasticsearch@7.10.0",
         "es-client-7.9": "npm:@elastic/elasticsearch@7.9.0",
         "@material-ui/core": "4.11.2",

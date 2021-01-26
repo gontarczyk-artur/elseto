@@ -4,4 +4,10 @@ body {
     background-color: $background-color-light;
     margin: 0;
     padding: 0;
+
+    .titlebar.cet-windows {
+        .window-title {
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif
+        }
+    }
 }
