@@ -1,18 +1,32 @@
 'use strict';
 
 import * as React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LoadingButton from '@material-ui/lab/LoadingButton';
 import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import { connect } from 'react-redux';
 
 import { getCurrentVersion, getAllVersions } from '../module/es-client-version';
 import { esConnect } from '../module/redux/action';
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        padding: theme.spacing(3)
+    },
+    button: {
+        height: '40px'
+    }
+}));
+
 const OfflineHomePage = props => {
+    const classes = useStyles();
+
     const [address, setAddress] = React.useState('http://localhost:9200');
     const [version, setVersion] = React.useState(getCurrentVersion);
     const [loadingButtonPending, setLoadingButtonPending] = React.useState(false);
@@ -56,15 +70,19 @@ const OfflineHomePage = props => {
     return !props.store.isConnected ? (
         <Container fixed>
             <Grid container spacing={0} direction='row' alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
-                <TextField label='Server address' disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
+                <Paper className={classes.paper} elevation={2}>
+                    <TextField label='Server address' disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
 
-                <TextField select disabled={loadingButtonPending} value={version} onChange={handleVersionChange} margin='normal' variant='outlined' size='small' style={{'margin': '0 20px'}}>
-                    {getAllVersions.map(versionValue => {
-                        return <MenuItem key={`version-${versionValue}`} value={versionValue}>{versionValue}</MenuItem>
-                    })}
-                </TextField>
+                    <TextField select disabled={loadingButtonPending} value={version} onChange={handleVersionChange} margin='normal' variant='outlined' size='small' style={{'margin': '0 20px'}}>
+                        {getAllVersions.map(versionValue => {
+                            return <MenuItem key={`version-${versionValue}`} value={versionValue}>{versionValue}</MenuItem>
+                        })}
+                    </TextField>
 
-                <LoadingButton variant='contained' color='primary' pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect}>Connect</LoadingButton>
+                    <LoadingButton className={classes.button} variant='contained' color='primary' pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} disableElevation>
+                        <ArrowForwardIcon />
+                    </LoadingButton>
+                </Paper>
             </Grid>
         </Container>
     ) : null;

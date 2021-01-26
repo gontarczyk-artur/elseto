@@ -24,7 +24,8 @@ module.exports = [
         target: 'electron-renderer',
         module: {
             rules: [
-                getJsLoaderRule()
+                getJsLoaderRule(),
+                getSassLoaderRule()
             ]
         },
         output: {
@@ -43,5 +44,16 @@ function getJsLoaderRule() {
         use: 'babel-loader',
         include: /src/,
         exclude: /node_modules/,
+    };
+}
+
+function getSassLoaderRule() {
+    return {
+        test: /\.scss$/,
+        use: [
+            'style-loader',
+            'css-loader',
+            'sass-loader'
+        ]
     };
 }
