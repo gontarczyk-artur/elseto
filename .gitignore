@@ -3,3 +3,4 @@ node_modules
 app/*.js
 app/*.LICENSE.txt
 !src/node_modules
+app/fonts
