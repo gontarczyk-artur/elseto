@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const OnlineHomePage = props => {
+const OnlineView = props => {
     const classes = useStyles();
 
     return props.store.isConnected ? (
@@ -41,9 +41,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-const OnlineHomePageContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(OnlineHomePage);
-
-export default OnlineHomePageContainer;
+export default connect(mapStateToProps,mapDispatchToProps)(OnlineView);

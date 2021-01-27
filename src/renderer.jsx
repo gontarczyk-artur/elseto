@@ -16,6 +16,7 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import OfflineView from './container/OfflineView';
+import OnlineView from './container/OnlineView';
 
 import { store } from './store';
 
@@ -25,6 +26,7 @@ const Root = () => {
     return (
         <Provider store={store}>
             <OfflineView />
+            <OnlineView />
         </Provider>
     );
 }
