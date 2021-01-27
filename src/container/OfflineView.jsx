@@ -39,7 +39,7 @@ const OfflineView = props => {
         } else {
             setLoadingButtonDisabled(false);
         }
-    }
+    };
     const handleVersionChange = event => setVersion(event.target.value);
     const handleConnect = async () => {
         setLoadingButtonPending(true);
@@ -65,7 +65,7 @@ const OfflineView = props => {
                 }
                 break;
         }
-    }
+    };
 
     return !props.store.isConnected ? (
         <Container fixed>
