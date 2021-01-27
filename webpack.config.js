@@ -25,7 +25,8 @@ module.exports = [
         module: {
             rules: [
                 getJsLoaderRule(),
-                getSassLoaderRule()
+                getSassLoaderRule(),
+                getFileLoaderRule()
             ]
         },
         output: {
@@ -42,8 +43,8 @@ function getJsLoaderRule() {
     return {
         test: /\.jsx?$/,
         use: 'babel-loader',
-        include: /src/,
         exclude: /node_modules/,
+        include: /src/
     };
 }
 
@@ -54,6 +55,21 @@ function getSassLoaderRule() {
             'style-loader',
             'css-loader',
             'sass-loader'
+        ]
+    };
+}
+
+function getFileLoaderRule() {
+    return {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts/'
+                }
+            }
         ]
     };
 }
