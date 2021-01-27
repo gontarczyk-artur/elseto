@@ -1,5 +1,6 @@
 'use strict';
 
+/* temporary disabled custom titlebar
 const { Menu } = require('electron').remote;
 const menu = new Menu();
 
@@ -10,7 +11,7 @@ const elsetoTitleBar = new customTitleBar.Titlebar({
 });
 elsetoTitleBar.updateTitle('ELSETO');
 elsetoTitleBar.updateMenu(menu);
-
+*/
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
