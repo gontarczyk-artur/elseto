@@ -4,27 +4,27 @@ import * as React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import LoadingButton from '@material-ui/lab/LoadingButton';
-import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import { connect } from 'react-redux';
 
-import { getCurrentVersion, getAllVersions } from '../module/es-client-version';
-import { esConnect } from '../module/redux/action';
+import { getCurrentVersion, getAllVersions } from 'es-client-version';
+import { esConnect } from '../action';
+
+import ServerAddress from '../component/ServerAddress';
+import ServerVersion from '../component/ServerVersion';
+import ConnectButton from '../component/ConnectButton';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
         padding: theme.spacing(3)
     },
-    button: {
-        height: '40px'
+    grid: {
+        minHeight: '100vh'
     }
 }));
 
-const OfflineHomePage = props => {
+const OfflineView = props => {
     const classes = useStyles();
 
     const [address, setAddress] = React.useState('http://localhost:9200');
@@ -69,19 +69,11 @@ const OfflineHomePage = props => {
 
     return !props.store.isConnected ? (
         <Container fixed>
-            <Grid container spacing={0} direction='row' alignItems='center' justify='center' style={{ minHeight: '100vh' }}>
+            <Grid container spacing={0} direction='row' alignItems='center' justify='center' className={classes.grid}>
                 <Paper className={classes.paper} elevation={2}>
-                    <TextField label='Server address' disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} variant='outlined' size='small' style={{'width': '300px'}} />
-
-                    <TextField select disabled={loadingButtonPending} value={version} onChange={handleVersionChange} margin='normal' variant='outlined' size='small' style={{'margin': '0 20px'}}>
-                        {getAllVersions.map(versionValue => {
-                            return <MenuItem key={`version-${versionValue}`} value={versionValue}>{versionValue}</MenuItem>
-                        })}
-                    </TextField>
-
-                    <LoadingButton className={classes.button} variant='contained' color='primary' pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} disableElevation>
-                        <ArrowForwardIcon />
-                    </LoadingButton>
+                    <ServerAddress disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} />
+                    <ServerVersion disabled={loadingButtonPending} value={version} onChange={handleVersionChange} availableVersions={getAllVersions} />
+                    <ConnectButton pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} />
                 </Paper>
             </Grid>
         </Container>
@@ -96,9 +88,4 @@ const mapDispatchToProps = {
     esConnect
 };
 
-const OfflineHomePageContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(OfflineHomePage);
-
-export default OfflineHomePageContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(OfflineView);

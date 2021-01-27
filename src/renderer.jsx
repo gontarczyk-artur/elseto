@@ -15,18 +15,16 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import OfflineHomePage from './page/OfflineHomePage';
-import OnlineHomePage from './page/OnlineHomePage';
+import OfflineView from './container/OfflineView';
 
-import { store } from './module/redux/store';
+import { store } from './store';
 
 import './style/style.scss';
 
-function Root() {
+const Root = () => {
     return (
         <Provider store={store}>
-            <OfflineHomePage />
-            <OnlineHomePage />
+            <OfflineView />
         </Provider>
     );
 }
