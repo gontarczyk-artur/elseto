@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 
-import { ES_CONNECT } from './action-type';
+import { ES_CONNECT } from '../action-type';
 
 
 const reducer = (state={}, action) => {

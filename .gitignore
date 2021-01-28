@@ -2,3 +2,5 @@ node_modules
 *.log
 app/*.js
 app/*.LICENSE.txt
+!src/node_modules
+app/fonts

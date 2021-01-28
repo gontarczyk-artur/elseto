@@ -2,7 +2,6 @@
 
 import { app, BrowserWindow } from 'electron';
 
-
 function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
@@ -10,11 +9,8 @@ function createWindow() {
         minWidth: 800,
         minHeight: 600,
         webPreferences: {
-            nodeIntegration: true,
-            enableRemoteModule: true
-        },
-        titleBarStyle: 'hidden',
-        frame: false
+            nodeIntegration: true
+        }
     });
 
     mainWindow.loadFile('index.html');
