@@ -4,20 +4,18 @@ import * as React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import CloseIcon from '@material-ui/icons/Close';
 
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 
 import { connect } from 'react-redux';
+
+import AppTopBar from '../component/AppTopBar';
 
 
 const drawerWidth = 72;
@@ -25,12 +23,6 @@ const drawerWidth = 72;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        boxShadow: 'none',
-        backgroundColor: '#fff',
-        color: '#000'
     },
     drawer: {
         width: drawerWidth,
@@ -47,9 +39,6 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-    },
-    toolbarTypographyH6: {
-        marginLeft: theme.spacing(3)
     },
     iconButtonRoot: {
         marginLeft: '12px',
@@ -90,23 +79,7 @@ const OnlineView = props => {
 
     return props.store.isConnected ? (
         <div className={classes.root}>
-            <AppBar position='fixed' className={classes.appBar}>
-                <Toolbar>
-                    <IconButton
-                        color='inherit'
-                        aria-label='open drawer'
-                        onClick={handleToggleDrawer}
-                        edge='start'
-                    >
-                        {isOpen ? <CloseIcon /> : <MenuIcon />}
-                    </IconButton>
-
-                    <Typography variant='h6' noWrap className={classes.toolbarTypographyH6}>
-                        Dashboard
-                    </Typography>
-                </Toolbar>
-                <Divider />
-            </AppBar>
+            <AppTopBar onClick={handleToggleDrawer} isOpen={isOpen} title='Dashboard' />
 
             <Drawer
                 className={classes.drawer}
