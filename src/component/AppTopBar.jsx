@@ -11,9 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         boxShadow: 'none',
