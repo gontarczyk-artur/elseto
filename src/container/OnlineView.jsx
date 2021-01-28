@@ -3,20 +3,15 @@
 import * as React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Tooltip from '@material-ui/core/Tooltip';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 
 import { connect } from 'react-redux';
 
-import AppTopBar from '../component/AppTopBar';
-
+import TopBar from '../component/TopBar';
+import LeftBar from '../component/LeftBar';
 
 const drawerWidth = 72;
 
@@ -24,25 +19,9 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        backgroundColor: 'transparent',
-        borderRight: 'none'
-    },
-    drawerContainer: {
-        overflow: 'auto'
-    },
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
-    },
-    iconButtonRoot: {
-        marginLeft: '12px',
-        marginTop: theme.spacing(2)
     },
     mainContent: {
         flexGrow: 1,
@@ -79,26 +58,9 @@ const OnlineView = props => {
 
     return props.store.isConnected ? (
         <div className={classes.root}>
-            <AppTopBar onClick={handleToggleDrawer} isOpen={isOpen} title='Dashboard' />
+            <TopBar onClick={handleToggleDrawer} isOpen={isOpen} title='Dashboard' />
 
-            <Drawer
-                className={classes.drawer}
-                variant='persistent'
-                anchor='left'
-                open={isOpen}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <Toolbar />
-                <div className={classes.drawerContainer}>
-                    <Tooltip title='Dashboard' placement='right'>
-                        <IconButton classes={{root: classes.iconButtonRoot}} disabled>
-                            <DashboardIcon />
-                        </IconButton>
-                    </Tooltip>
-                </div>
-            </Drawer>
+            <LeftBar isOpen={isOpen} />
 
             <main className={clsx(classes.mainContent, {
                 [classes.contentShift]: isOpen,

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const AppTopBar = props => {
+const TopBar = props => {
     const classes = useStyles();
 
     return (
@@ -46,4 +46,4 @@ const AppTopBar = props => {
     );
 }
 
-export default AppTopBar;
+export default TopBar;
