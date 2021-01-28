@@ -134,4 +134,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps,mapDispatchToProps)(OnlineView);
+export default connect(mapStateToProps, mapDispatchToProps)(OnlineView);
