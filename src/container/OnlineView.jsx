@@ -1,22 +1,22 @@
 'use strict';
 
 import * as React from 'react';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { connect } from 'react-redux';
+
+const drawerWidth = 72;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,30 +29,45 @@ const useStyles = makeStyles((theme) => ({
         color: '#000'
     },
     drawer: {
-        width: '72px',
-        flexShrink: 0,
+        width: drawerWidth,
+        flexShrink: 0
     },
     drawerPaper: {
-        width: '72px'
+        width: drawerWidth,
+        backgroundColor: 'transparent',
+        borderRight: 'none'
     },
     drawerContainer: {
-        overflow: 'auto',
-        marginTop: theme.spacing(3)
+        overflow: 'auto'
     },
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
     },
-    listItemButtonGutter: {
-        paddingLeft: '24px',
-        paddingRight: '24px'
-    },
-    listItemIconRoot: {
-        minWidth: '24px'
-    },
     toolbarTypographyH6: {
         marginLeft: theme.spacing(3)
-    }
+    },
+    iconButtonRoot: {
+        marginLeft: '12px',
+        marginTop: theme.spacing(2)
+    },
+    mainContent: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: -drawerWidth,
+    },
+    contentShift: {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+    },
+    toolbar: theme.mixins.toolbar
 }));
 
 const OnlineView = props => {
@@ -66,7 +81,7 @@ const OnlineView = props => {
 
     return props.store.isConnected ? (
         <div className={classes.root}>
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position='fixed' className={classes.appBar}>
                 <Toolbar>
                     <IconButton
                         color='inherit'
@@ -95,17 +110,20 @@ const OnlineView = props => {
             >
                 <Toolbar />
                 <div className={classes.drawerContainer}>
-                    <List>
-                        <ListItem button key='Dashboard' classes={{ gutters: classes.listItemButtonGutter }} selected>
-                            <Tooltip title='Dashboard' placement='right'>
-                                <ListItemIcon classes={{ root: classes.listItemIconRoot }}>
-                                    <DashboardIcon />
-                                </ListItemIcon>
-                            </Tooltip>
-                        </ListItem>
-                    </List>
+                    <Tooltip title='Dashboard' placement='right'>
+                        <IconButton classes={{root: classes.iconButtonRoot}} disabled>
+                            <DashboardIcon />
+                        </IconButton>
+                    </Tooltip>
                 </div>
             </Drawer>
+
+            <main className={clsx(classes.mainContent, {
+                [classes.contentShift]: isOpen,
+            })}>
+                <div className={classes.toolbar} />
+                <Typography paragraph>Dashboard</Typography>
+            </main>
         </div>
     ) : null;
 }
