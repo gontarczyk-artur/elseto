@@ -26,6 +26,7 @@ module.exports = [
             rules: [
                 getJsLoaderRule(),
                 getSassLoaderRule(),
+                getCssLoaderRule(),
                 getFileLoaderRule()
             ]
         },
@@ -55,6 +56,16 @@ function getSassLoaderRule() {
             'style-loader',
             'css-loader',
             'sass-loader'
+        ]
+    };
+}
+
+function getCssLoaderRule() {
+    return {
+        test: /\.css$/,
+        use: [
+            'style-loader',
+            'css-loader'
         ]
     };
 }
