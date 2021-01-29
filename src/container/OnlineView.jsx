@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 
 import TopBar from '../component/TopBar';
-import LeftBar from '../component/LeftBar';
+import SideBar from '../component/SideBar';
 import MainContent from '../component/MainContent';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +28,7 @@ const OnlineView = props => {
     return props.store.isConnected ? (
         <div className={classes.root}>
             <TopBar onClick={handleToggleDrawer} isOpen={isOpen} title='Dashboard' />
-            <LeftBar isOpen={isOpen} />
+            <SideBar isOpen={isOpen} />
             <MainContent isOpen={isOpen}>
                 <Typography paragraph>Dashboard</Typography>
                 <Typography paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in consequat justo. Vivamus nec dolor nibh. Fusce laoreet volutpat metus, in sodales nunc luctus vel. In tortor mauris, elementum sit amet libero ut, consectetur pellentesque velit. Proin cursus, metus sit amet pretium gravida, mauris erat luctus neque, et bibendum elit neque sed dui. Praesent ornare, ante facilisis fermentum vulputate, risus justo bibendum leo, eget pulvinar nisl enim vel leo. Ut ac maximus eros. Donec luctus lectus sed tellus condimentum vulputate in nec ante. Nullam tempus gravida ullamcorper. Vivamus eu felis et odio condimentum ullamcorper in ac tortor.</Typography>

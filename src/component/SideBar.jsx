@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const LeftBar = props => {
+const SideBar = props => {
     const classes = useStyles();
 
     return (
@@ -54,4 +54,4 @@ const LeftBar = props => {
     );
 }
 
-export default LeftBar;
+export default SideBar;
