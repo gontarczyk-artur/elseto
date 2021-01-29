@@ -5,6 +5,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import { connect } from 'react-redux';
 
@@ -31,6 +32,8 @@ const OfflineView = props => {
     const [version, setVersion] = React.useState(getCurrentVersion);
     const [loadingButtonPending, setLoadingButtonPending] = React.useState(false);
     const [loadingButtonDisabled, setLoadingButtonDisabled] = React.useState(false);
+    const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+    const [snackbarMessage, setSnackbarMessage] = React.useState('');
     const handleAddressChange = event => {
         let fieldValue = event.target.value;
         setAddress(event.target.value);
@@ -61,22 +64,34 @@ const OfflineView = props => {
                     }
                 } catch(error) {
                     setLoadingButtonPending(false);
-                    console.log(error);
+                    setSnackbarMessage(error.message);
+                    setSnackbarOpen(true);
                 }
                 break;
         }
     };
+    const handleCloseSnackbar = () => {
+        setSnackbarOpen(false);
+        setSnackbarMessage('');
+    };
 
     return !props.store.isConnected ? (
-        <Container fixed>
-            <Grid container spacing={0} direction='row' alignItems='center' justify='center' className={classes.grid}>
-                <Paper className={classes.paper} elevation={2}>
-                    <ServerAddress disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} />
-                    <ServerVersion disabled={loadingButtonPending} value={version} onChange={handleVersionChange} availableVersions={getAllVersions} />
-                    <ConnectButton pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} />
-                </Paper>
-            </Grid>
-        </Container>
+        <div>
+            <Container fixed>
+                <Grid container spacing={0} direction='row' alignItems='center' justify='center' className={classes.grid}>
+                    <Paper className={classes.paper} elevation={2}>
+                        <ServerAddress disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} />
+                        <ServerVersion disabled={loadingButtonPending} value={version} onChange={handleVersionChange} availableVersions={getAllVersions} />
+                        <ConnectButton pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} />
+                    </Paper>
+                </Grid>
+            </Container>
+            <Snackbar 
+                open={snackbarOpen} 
+                message={snackbarMessage} 
+                autoHideDuration={3000} 
+                onClose={handleCloseSnackbar} />
+        </div>
     ) : null;
 }
 
