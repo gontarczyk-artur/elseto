@@ -3,11 +3,13 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 
 import { connect } from 'react-redux';
 
 import TopBar from '../component/TopBar';
 import SideBar from '../component/SideBar';
+import SideBarMenuItem from '../component/SidebarMenuItem';
 import MainContent from '../component/MainContent';
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +30,11 @@ const OnlineView = props => {
     return props.store.isConnected ? (
         <div className={classes.root}>
             <TopBar onClick={handleToggleDrawer} isOpen={isOpen} title='Dashboard' />
-            <SideBar isOpen={isOpen} />
+            <SideBar isOpen={isOpen}>
+                <SideBarMenuItem title='Dashboard'><DashboardIcon /></SideBarMenuItem>
+                <SideBarMenuItem title='Dashboard 2' isDisabled><DashboardIcon /></SideBarMenuItem>
+                <SideBarMenuItem title='Dashboard NEW!'><DashboardIcon /></SideBarMenuItem>
+            </SideBar>
             <MainContent isOpen={isOpen}>
                 <Typography paragraph>Dashboard</Typography>
                 <Typography paragraph>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in consequat justo. Vivamus nec dolor nibh. Fusce laoreet volutpat metus, in sodales nunc luctus vel. In tortor mauris, elementum sit amet libero ut, consectetur pellentesque velit. Proin cursus, metus sit amet pretium gravida, mauris erat luctus neque, et bibendum elit neque sed dui. Praesent ornare, ante facilisis fermentum vulputate, risus justo bibendum leo, eget pulvinar nisl enim vel leo. Ut ac maximus eros. Donec luctus lectus sed tellus condimentum vulputate in nec ante. Nullam tempus gravida ullamcorper. Vivamus eu felis et odio condimentum ullamcorper in ac tortor.</Typography>

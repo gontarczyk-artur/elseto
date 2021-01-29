@@ -22,10 +22,6 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerContainer: {
         overflow: 'auto'
-    },
-    iconButtonRoot: {
-        marginLeft: '12px',
-        marginTop: theme.spacing(2)
     }
 }));
 
@@ -44,11 +40,7 @@ const SideBar = props => {
         >
             <Toolbar />
             <div className={classes.drawerContainer}>
-                <Tooltip title='Dashboard' placement='right'>
-                    <IconButton classes={{root: classes.iconButtonRoot}} disabled>
-                        <DashboardIcon />
-                    </IconButton>
-                </Tooltip>
+                {props.children}
             </div>
         </Drawer>
     );
