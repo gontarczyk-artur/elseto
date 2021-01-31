@@ -4,7 +4,11 @@ import { reducers } from '../reducer';
 
 
 const initialState = {
-    store: { isConnected: false }
+    store: {
+        isConnected: false,
+        title: null,
+        container: null
+    }
 };
 
 function configureStore() {

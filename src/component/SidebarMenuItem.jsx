@@ -17,7 +17,7 @@ const SideBarMenuItem = props => {
 
     return (
         <Tooltip title={props.title} placement='right'>
-            <IconButton classes={{root: classes.iconButtonRoot}} disabled={props.isDisabled}>
+            <IconButton classes={{root: classes.iconButtonRoot}} disabled={props.isDisabled} onClick={props.onClick}>
                 {props.children}
             </IconButton>
         </Tooltip>
