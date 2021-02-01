@@ -2,9 +2,7 @@
 
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ListIcon from '@material-ui/icons/List';
 
 import { connect } from 'react-redux';
 
@@ -32,20 +30,27 @@ const OnlineView = props => {
         setOpen(!isOpen);
     };
 
-    const switchDashboardContent = () => {
-        props.switchMainContent({
+    const sidebarMenu = [
+        {
             title: 'Dashboard',
-            container: <DashboardContent />
-        });
-    };
+            container: <DashboardContent />,
+            icon: <DashboardIcon />
+        }
+    ];
 
     return props.store.isConnected ? (
         <div className={classes.root}>
             <TopBar onClick={handleToggleDrawer} isOpen={isOpen} title={props.store.title} />
             <SideBar isOpen={isOpen}>
-                <SideBarMenuItem title='Dashboard' onClick={switchDashboardContent}>
-                    <DashboardIcon />
-                </SideBarMenuItem>
+                {sidebarMenu.map(linkItem => {
+                    let onClickHandle = () => props.switchMainContent({ title: linkItem.title, container: linkItem.container });
+                    let isDisabled = linkItem.title === props.store.title;
+                    return (
+                        <SideBarMenuItem title={linkItem.title} onClick={onClickHandle} isDisabled={isDisabled}>
+                            {linkItem.icon}
+                        </SideBarMenuItem>
+                    );
+                })}
             </SideBar>
             <MainContent isOpen={isOpen}>
                 {props.store.container}
