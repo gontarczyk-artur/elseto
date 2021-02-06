@@ -7,7 +7,11 @@ const initialState = {
     store: {
         isConnected: false,
         title: null,
-        container: null
+        container: null,
+        snackbar: {
+            isOpen: false,
+            message: null
+        }
     }
 };
 

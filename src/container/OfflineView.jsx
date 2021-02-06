@@ -1,16 +1,15 @@
 'use strict';
 
 import * as React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Snackbar from '@material-ui/core/Snackbar';
 
 import { connect } from 'react-redux';
 
 import { getCurrentVersion, getAllVersions } from 'es-client-version';
-import { esConnect } from '../action';
+import { esConnect, showNotification } from '../action';
 
 import ServerAddress from '../component/ServerAddress';
 import ServerVersion from '../component/ServerVersion';
@@ -32,8 +31,6 @@ const OfflineView = props => {
     const [version, setVersion] = React.useState(getCurrentVersion);
     const [loadingButtonPending, setLoadingButtonPending] = React.useState(false);
     const [loadingButtonDisabled, setLoadingButtonDisabled] = React.useState(false);
-    const [snackbarOpen, setSnackbarOpen] = React.useState(false);
-    const [snackbarMessage, setSnackbarMessage] = React.useState('');
     const handleAddressChange = event => {
         let fieldValue = event.target.value;
         setAddress(event.target.value);
@@ -61,37 +58,26 @@ const OfflineView = props => {
                             address,
                             version
                         });
+                        props.showNotification({ message: 'CONNECTED' });
                     }
                 } catch(error) {
                     setLoadingButtonPending(false);
-                    setSnackbarMessage(error.message);
-                    setSnackbarOpen(true);
+                    props.showNotification({ message: error.message });
                 }
                 break;
         }
     };
-    const handleCloseSnackbar = () => {
-        setSnackbarOpen(false);
-        setSnackbarMessage('');
-    };
 
     return !props.store.isConnected ? (
-        <div>
-            <Container fixed>
-                <Grid container spacing={0} direction='row' alignItems='center' justify='center' className={classes.grid}>
-                    <Paper className={classes.paper} elevation={2}>
-                        <ServerAddress disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} />
-                        <ServerVersion disabled={loadingButtonPending} value={version} onChange={handleVersionChange} availableVersions={getAllVersions} />
-                        <ConnectButton pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} />
-                    </Paper>
-                </Grid>
-            </Container>
-            <Snackbar 
-                open={snackbarOpen} 
-                message={snackbarMessage} 
-                autoHideDuration={3000} 
-                onClose={handleCloseSnackbar} />
-        </div>
+        <Container fixed>
+            <Grid container spacing={0} direction='row' alignItems='center' justify='center' className={classes.grid}>
+                <Paper className={classes.paper} elevation={2}>
+                    <ServerAddress disabled={loadingButtonPending} defaultValue={address} onChange={handleAddressChange} />
+                    <ServerVersion disabled={loadingButtonPending} value={version} onChange={handleVersionChange} availableVersions={getAllVersions} />
+                    <ConnectButton pending={loadingButtonPending} disabled={loadingButtonDisabled} onClick={handleConnect} />
+                </Paper>
+            </Grid>
+        </Container>
     ) : null;
 }
 
@@ -100,7 +86,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    esConnect
+    esConnect,
+    showNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfflineView);

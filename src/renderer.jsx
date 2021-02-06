@@ -7,6 +7,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import OfflineView from './container/OfflineView';
 import OnlineView from './container/OnlineView';
+import Notification from './container/Notification';
 
 import { store } from './store';
 
@@ -24,6 +25,7 @@ const Root = () => {
             <Provider store={store}>
                 <OfflineView />
                 <OnlineView />
+                <Notification />
             </Provider>
         </ThemeProvider>
     );
