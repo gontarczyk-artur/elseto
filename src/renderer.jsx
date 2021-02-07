@@ -16,6 +16,9 @@ import './style/style.scss';
 const theme = createMuiTheme({
     typography: {
         'fontFamily': '"Open Sans"'
+    },
+    palette: {
+        type: 'light'
     }
 });
 
