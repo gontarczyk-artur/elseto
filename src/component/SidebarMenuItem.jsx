@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,11 +15,9 @@ const SideBarMenuItem = props => {
     const classes = useStyles();
 
     return (
-        <Tooltip title={props.title} placement='right'>
-            <IconButton classes={{root: classes.iconButtonRoot}} disabled={props.isDisabled} onClick={props.onClick}>
-                {props.children}
-            </IconButton>
-        </Tooltip>
+        <IconButton classes={{root: classes.iconButtonRoot}} disabled={props.isDisabled} onClick={props.onClick} title={props.title}>
+            {props.children}
+        </IconButton>
     );
 }
 

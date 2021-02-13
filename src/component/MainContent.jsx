@@ -7,8 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 
-const drawerWidth = 72;
-
 const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
@@ -21,10 +19,9 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: -drawerWidth,
+        marginLeft: '72px',
         overflow: 'auto',
-        height: 'calc(100vh - 65px)',
-        marginTop: '65px'
+        height: '100vh'
     },
     contentShift: {
         transition: theme.transitions.create('margin', {
@@ -43,7 +40,7 @@ const MainContent = props => {
 
     return (
         <main className={clsx(classes.mainContent, {
-            [classes.contentShift]: props.isOpen,
+            [classes.contentShift]: props.isExtraSideBarOpen,
         })}>
             <OverlayScrollbarsComponent
                 style={{

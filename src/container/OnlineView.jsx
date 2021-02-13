@@ -3,13 +3,15 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import { connect } from 'react-redux';
 
 import { switchMainContent } from '../action';
 
-import TopBar from '../component/TopBar';
 import SideBar from '../component/SideBar';
+import ExtraSideBar from '../component/ExtraSideBar';
 import SideBarMenuItem from '../component/SidebarMenuItem';
 import MainContent from '../component/MainContent';
 
@@ -24,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
 const OnlineView = props => {
     const classes = useStyles();
 
-    const [isOpen, setOpen] = React.useState(false);
+    const [isExtraSideBarOpen, setExtraSideBarOpen] = React.useState(false);
 
-    const handleToggleDrawer = () => {
-        setOpen(!isOpen);
-    };
+    const handleToggleExtraSideBar = () => {
+        setExtraSideBarOpen(!isExtraSideBarOpen);
+    }
 
     const sidebarMenu = [
         {
@@ -40,10 +42,13 @@ const OnlineView = props => {
 
     return props.store.isConnected ? (
         <div className={classes.root}>
-            <TopBar onClick={handleToggleDrawer} isOpen={isOpen} title={props.store.title} />
-            <SideBar isOpen={isOpen}>
+            <SideBar className={classes.sideBar}>
                 {sidebarMenu.map(linkItem => {
-                    let onClickHandle = () => props.switchMainContent({ title: linkItem.title, container: linkItem.container });
+                    let onClickHandle = () => {
+                        setExtraSideBarOpen(true);
+                        props.switchMainContent({ title: linkItem.title, container: linkItem.container });
+                    };
+
                     let isDisabled = linkItem.title === props.store.title;
                     return (
                         <SideBarMenuItem title={linkItem.title} onClick={onClickHandle} isDisabled={isDisabled}>
@@ -51,8 +56,15 @@ const OnlineView = props => {
                         </SideBarMenuItem>
                     );
                 })}
+
+                <SideBarMenuItem title='Toggle Extra Side Bar' onClick={handleToggleExtraSideBar} isDisabled={!props.store.title}>
+                    { isExtraSideBarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon /> }
+                </SideBarMenuItem>
             </SideBar>
-            <MainContent isOpen={isOpen}>
+
+            <ExtraSideBar isOpen={isExtraSideBarOpen} title={props.store.title} />
+
+            <MainContent isExtraSideBarOpen={isExtraSideBarOpen}>
                 {props.store.container}
             </MainContent>
         </div>
