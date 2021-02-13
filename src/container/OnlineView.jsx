@@ -57,9 +57,11 @@ const OnlineView = props => {
                     );
                 })}
 
-                <SideBarMenuItem title='Toggle Extra Side Bar' onClick={handleToggleExtraSideBar} isDisabled={!props.store.title}>
-                    { isExtraSideBarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon /> }
-                </SideBarMenuItem>
+                { props.store.title ?
+                    (<SideBarMenuItem title='Toggle Extra Side Bar' onClick={handleToggleExtraSideBar} isDisabled={!props.store.title}>
+                        { isExtraSideBarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon /> }
+                    </SideBarMenuItem>)
+                : null }
             </SideBar>
 
             <ExtraSideBar isOpen={isExtraSideBarOpen} title={props.store.title} />
