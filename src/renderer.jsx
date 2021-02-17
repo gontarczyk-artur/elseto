@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import OfflineView from './container/OfflineView';
 import OnlineView from './container/OnlineView';
@@ -15,16 +16,20 @@ import './style/style.scss';
 
 const theme = createMuiTheme({
     typography: {
-        'fontFamily': '"Open Sans"'
+        fontFamily: '"Open Sans"'
     },
     palette: {
-        type: 'light'
+        type: 'light',
+        background: {
+            default: '#f5f5f5'
+        }
     }
 });
 
 const Root = () => {
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Provider store={store}>
                 <OfflineView />
                 <OnlineView />
