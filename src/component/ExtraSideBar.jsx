@@ -8,6 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 const useStyles = makeStyles((theme) => ({
     sidebar: {
         width: '160px',
@@ -39,6 +43,16 @@ const ExtraSideBar = props => {
                 </Typography>
             </Toolbar>
             <Divider />
+
+            <List component="nav" aria-label="main mailbox folders">
+                {props.menu.map(linkItem => {
+                    return (
+                        <ListItem button>
+                            <ListItemText primary={linkItem.text} />
+                        </ListItem>
+                    );
+                })}
+            </List>
         </Paper>
     );
 }

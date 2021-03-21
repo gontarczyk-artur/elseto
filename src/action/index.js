@@ -14,7 +14,8 @@ export const switchMainContent = data => ({
     type: SWITCH_MAIN_CONTENT,
     payload: {
         title: data.title,
-        container: data.container
+        container: data.container,
+        extraSideBarMenu: data.extraSideBarMenu
     }
 });
 

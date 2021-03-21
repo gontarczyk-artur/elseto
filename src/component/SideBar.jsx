@@ -4,10 +4,12 @@ import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
-import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = makeStyles(() => ({
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+const useStyles = makeStyles((theme) => ({
     drawer: {
         width: '72px',
         flexShrink: 0
@@ -33,8 +35,8 @@ const SideBar = props => {
             }}
         >
             <Toolbar>
-                <IconButton edge='start'>
-                    <MenuIcon />
+                <IconButton edge="start" onClick={props.toggleExtraSideBar} disabled={props.isDisabled} title="Toggle Extra Side Bar">
+                    {props.isExtraSideBarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon />}
                 </IconButton>
             </Toolbar>
 

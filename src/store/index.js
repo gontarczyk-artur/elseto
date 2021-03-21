@@ -8,6 +8,7 @@ const initialState = {
         isConnected: false,
         title: null,
         container: null,
+        extraSideBarMenu: [],
         snackbar: {
             isOpen: false,
             message: null

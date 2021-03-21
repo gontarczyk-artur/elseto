@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import ListIcon from '@material-ui/icons/List';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -16,6 +17,7 @@ import SideBarMenuItem from '../component/SidebarMenuItem';
 import MainContent from '../component/MainContent';
 
 import DashboardContent from './DashboardContent';
+import IndicesContent from './IndicesContent';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,17 +38,32 @@ const OnlineView = props => {
         {
             title: 'Dashboard',
             container: <DashboardContent />,
-            icon: <DashboardIcon />
+            icon: <DashboardIcon />,
+            extraSideBarMenu: [
+                {
+                    text: 'Add component'
+                }
+            ]
+        },
+        {
+            title: 'Indices',
+            container: <IndicesContent />,
+            icon: <ListIcon />,
+            extraSideBarMenu: [
+                {
+                    text: 'Switch view'
+                }
+            ]
         }
     ];
 
     return props.store.isConnected ? (
         <div className={classes.root}>
-            <SideBar className={classes.sideBar}>
+            <SideBar className={classes.sideBar} toggleExtraSideBar={handleToggleExtraSideBar} isDisabled={!props.store.title} isExtraSideBarOpen={isExtraSideBarOpen}>
                 {sidebarMenu.map(linkItem => {
                     let onClickHandle = () => {
                         setExtraSideBarOpen(true);
-                        props.switchMainContent({ title: linkItem.title, container: linkItem.container });
+                        props.switchMainContent(linkItem);
                     };
 
                     let isDisabled = linkItem.title === props.store.title;
@@ -56,15 +73,9 @@ const OnlineView = props => {
                         </SideBarMenuItem>
                     );
                 })}
-
-                { props.store.title ?
-                    (<SideBarMenuItem title='Toggle Extra Side Bar' onClick={handleToggleExtraSideBar} isDisabled={!props.store.title}>
-                        { isExtraSideBarOpen ? <ArrowBackIcon /> : <ArrowForwardIcon /> }
-                    </SideBarMenuItem>)
-                : null }
             </SideBar>
 
-            <ExtraSideBar isOpen={isExtraSideBarOpen} title={props.store.title} />
+            <ExtraSideBar isOpen={isExtraSideBarOpen} title={props.store.title} menu={props.store.extraSideBarMenu} />
 
             <MainContent isExtraSideBarOpen={isExtraSideBarOpen}>
                 {props.store.container}
