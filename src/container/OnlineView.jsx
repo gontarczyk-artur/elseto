@@ -19,6 +19,8 @@ import MainContent from '../component/MainContent';
 import DashboardContent from './DashboardContent';
 import IndicesContent from './IndicesContent';
 
+import DashboardExtraSidebarMenu from './DashboardExtraSidebarMenu'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex'
@@ -39,21 +41,13 @@ const OnlineView = props => {
             title: 'Dashboard',
             container: <DashboardContent />,
             icon: <DashboardIcon />,
-            extraSideBarMenu: [
-                {
-                    text: 'Add component'
-                }
-            ]
+            extraSideBarMenu: <DashboardExtraSidebarMenu />
         },
         {
             title: 'Indices',
             container: <IndicesContent />,
             icon: <ListIcon />,
-            extraSideBarMenu: [
-                {
-                    text: 'Switch view'
-                }
-            ]
+            extraSideBarMenu: null
         }
     ];
 
@@ -75,7 +69,9 @@ const OnlineView = props => {
                 })}
             </SideBar>
 
-            <ExtraSideBar isOpen={isExtraSideBarOpen} title={props.store.title} menu={props.store.extraSideBarMenu} />
+            <ExtraSideBar isOpen={isExtraSideBarOpen} title={props.store.title}>
+                {props.store.extraSideBarMenu}
+            </ExtraSideBar>
 
             <MainContent isExtraSideBarOpen={isExtraSideBarOpen}>
                 {props.store.container}
